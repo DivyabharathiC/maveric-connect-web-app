@@ -7,6 +7,8 @@ import SignUpPage from "./pages/SignUpPage";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
+import PostListsPage from "./pages/HomePage/PostListsPage";
+import PostList from "./components/PostList";
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<SignUp/>} />
+        <Route path="/home/postlistpage" element={<PostList/>} />
       </Routes>
     </Router>
   );
