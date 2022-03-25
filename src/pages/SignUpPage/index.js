@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-// import "./styles.css";
+import "./style.css";
 import Endpoints from "../../api/Endpoints";
+import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
   const [responseMessage, setResponseMessaage] = useState({
@@ -70,9 +71,6 @@ const SignUpPage = () => {
                 className="form-control"
                 placeholder="Username"
               />
-              <div class="valid-feedback">
-        Looks good!
-      </div>
             </div>
             <div className="form-group">
              
@@ -109,12 +107,13 @@ const SignUpPage = () => {
             </div>
             <input
               type="submit"
-              value="SignUp"
+              value="signup"
               className="btn btn-primary btn-block"
             />
             <br />
             <p>
-              <a href="#">Already Registered ? Login</a>
+            
+              <Link to="/login">Already Registered ? Login</Link>
             </p>
           </form>
         </div>

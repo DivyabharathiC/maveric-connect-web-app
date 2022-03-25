@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./style.css";
-import Endpoints from "../../api/Endpoints"
+import Endpoints from "../../api/Endpoints";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
     const [responseMessage, setResponseMessage] = useState({
@@ -94,12 +95,12 @@ const LoginPage = () => {
                         </div>
                         <input
                             type="submit"
-                            value="Login"
+                            value="login"
                             className="btn btn-primary btn-block"
                         />
                         <br />
                         <p>
-                            <a href="#">New to Maveric Book? SignUp</a>
+                        <Link to="/signup">New to Maveric Book? SignUp</Link>
                         </p>
                        
                         <p>
