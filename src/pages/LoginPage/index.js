@@ -55,11 +55,11 @@ const LoginPage = () => {
     }
     return (
         <div className="row">
-            <div className="col-lg-3"></div>
-            <div className="col-lg-6">
+            <div className="col-lg-4"></div>
+      <div className="col-lg-4">
                 <div className="wrapper">
                   
-                    <hr />
+                   
 
                     {responseMessage.message && (
                         <div class="alert alert-success" role="alert">
@@ -99,12 +99,16 @@ const LoginPage = () => {
                         />
                         <br />
                         <p>
-                            <a href="#">Already register? Click Here</a>
+                            <a href="#">New to Maveric Book? SignUp</a>
+                        </p>
+                       
+                        <p>
+                            <a href="#">Forgot Password?</a>
                         </p>
                     </form>
                 </div>
             </div>
-            <div className="col-lg-3"></div>
+            <div className="col-lg-4"></div>
         </div>
     );
 };

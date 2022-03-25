@@ -3,8 +3,8 @@
 }
 
 .Maveric-Color {
-color:#214e8f ;
-}
+  color:#214e8f ;
+  }
 
 .App-logo {
   height: 40vmin;
@@ -18,29 +18,29 @@ color:#214e8f ;
 }
 
 .App-header {
-  /* background-color: #282c34;*/
-  min-height:0ch;
-  max-height:0ch;
+  /* background-color: #282c34; */
+  min-height:min-content;
   display: flex;
-  flex-direction: column; 
-  align-items: center;
-  justify-content: center; 
-  font-size: calc(10px + 2vmin);
-  color:  #214e8f; 
-}
-.App-footer {
-  /* background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column; */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(1px + 2vmin);
-  color: white;
+  font-size: calc(10px + 2vmin);
+  color: #214e8f ;
+}
+
+.App-footer {
+  background-color: #214e8f ;
+  min-height:min-content;
+  display: flex;
+  flex-direction: column;
+align-items: center;
+justify-content: center;
+font-size: calc(1px + 2vmin);
+color: white;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #214e8f ;
 }
 
 @keyframes App-logo-spin {
