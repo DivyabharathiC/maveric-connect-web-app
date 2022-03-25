@@ -6,6 +6,7 @@ import Header from "../Header";
 function SignUp() {
   return (
     <div className="SignUp">
+        
       <Header/>
 
       <SignUpPage/>

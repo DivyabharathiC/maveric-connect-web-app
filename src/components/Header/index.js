@@ -2,14 +2,14 @@ import React from "react";
 import images from "../../images/maveric-logo-updated.png";
 const Header = () => {
   return (
-    <div class="jumbotron">
+    <div className="App-header">
 
       <tr>
         <td>
         <img src={images} alt="Maveric" />
         </td>
         <td>
-        <h1 className="App-header" > Maveric connect</h1>
+        <h4> Maveric connect</h4>
         </td>
       </tr>
      
