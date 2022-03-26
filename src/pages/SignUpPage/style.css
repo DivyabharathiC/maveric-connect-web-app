@@ -1,7 +1,8 @@
 .wrapper{
-    background-color: #fff;
+    background-color: white;
     padding: 40px;
-    margin-top: 80px;
-    /* box-shadow: 5px 10px #888888; */
+    margin-top: 40px;
     border-radius: 10px;
+    border-color: #111111;
+    
 }

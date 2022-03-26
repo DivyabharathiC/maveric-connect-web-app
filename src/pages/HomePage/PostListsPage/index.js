@@ -1,96 +1,65 @@
-import React from "react";
-import images from "../../../images/default-profile-pic.jpg"
+import React, { useState } from "react";
+import axios from "axios";
+import Endpoints from "../../../api/Endpoints.js";
+import images from "../../../images/default-profile-pic.jpg";
+import "./style.css";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { postList } from "../../../Test/postList";
 
 const PostListsPage = () => {
-  return (
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <img
-            class="mr-3"
-            src={images}
-            alt="Generic placeholder image"
-            width="64"
-            height="64"
-          />
-        </div>
-        <div class="col-6">
-          <div class="media-body">
-            <h5 class="mt-0 mb-1">List-based media object</h5>
-            <p>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-              scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-              vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-              nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </p>
+     const [users, setUsers] = useState([]);
+    let navigate = useNavigate();
+    const getPost = () => {
+      axios
+        .get(Endpoints.GET_POSTS_URL)
+        .then((response) => {
+          setUsers(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    return (
+      <div className="post-list">
+        <h3 className="text-center"></h3>
+  
+         {/* {users.map((customer) => (  */}
+        {postList.map((customer) => (
+          <div key={customer.id} className="container">
+            <div class="list-group">
+              <a
+                href="#"
+                onClick={() => {
+                  navigate(`/postdetailpage/${customer.id}`);
+                }}
+                class="list-group-item list-group-item-action"
+              >
+                <div class="d-flex w-150">
+                  <small>
+                    <img src={images} className="img-thumbnail" width={80} />
+                    <br />
+                    {customer.postedBy.email}
+                  </small>
+                  &nbsp; &nbsp; &nbsp;
+                  <span>{customer.post}</span>
+                </div>
+  
+                <div class="d-flex w-100 justify-content-between">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <small>{customer.likeCounts} Likes</small>
+                  <small>{customer.commentCounts} Comments</small>
+                  <div></div>
+                </div>
+              </a>
+              <br />
+            </div>
           </div>
-        </div>
-        <div class="col">
-          <img class="mr-1" ssrc="Like.jpg" width="64" height="64" alt="" />
-          Like
-          <img class="mr-1" src="comment.png" width="64" height="64" alt="" />
-          Comment
-        </div>
+        ))}
       </div>
-      <div class="row">
-        <div class="col">
-          <img
-            class="mr-3"
-            src={images}
-            alt="Generic placeholder image"
-            width="64"
-            height="64"
-          />
-        </div>
-        <div class="col-6">
-          <div class="media-body">
-            <h5 class="mt-0 mb-1">List-based media object</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-            scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-            vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-            vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
-        </div>
-        <div class="col">
-          <img class="mr-1" ssrc="Like.jpg" width="64" height="64" alt="" />
-          2 Like
-          <img class="mr-1" src="comment.png" width="64" height="64" alt="" />
-          Comment
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <img
-            class="mr-3"
-            src={images}
-            alt="Generic placeholder image"
-            width="64"
-            height="64"
-          />
-        </div>
-        <div class="col-6">
-          <div class="media-body">
-            <h5 class="mt-0 mb-1">List-based media object</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-            scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-            vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-            vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
-        </div>
-        <div class="col">
-          <img class="mr-1" ssrc="Like.jpg" width="64" height="64" alt="" />
-          Like
-          <img class="mr-1" src="comment.png" width="64" height="64" alt="" />
-          Comment
-        </div>
-        {/* <div class="row">
-          <div class="col-8 col-sm-6">Comment </div>
-
-          <div class="col-4 col-sm-6">5 Likes</div>
-        </div> */}
-      </div>
-    </div>
-  );
-};
-
+    );
+  };
 export default PostListsPage;

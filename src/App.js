@@ -9,14 +9,16 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import PostListsPage from "./pages/HomePage/PostListsPage";
 import PostList from "./components/PostList";
+import PostDetail from "./components/PostDetail";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<SignUp/>} />
-        <Route path="/home/postlistpage" element={<PostList/>} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<SignUp />} />
+        <Route exact path="/home/postlistpage" element={<PostList />} />
+        <Route exact path="/home/postdetailpage/:id" element={<PostDetail />} />
       </Routes>
     </Router>
   );

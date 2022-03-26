@@ -1,7 +1,8 @@
 const Endpoints = {
+    GET_POSTS_URL:'http://localhost:3010/api/v1/posts',
+    GET_POSTBYID_URL:'http://localhost:3010/api/v1/posts/623c33cc6b812660cc08a95a'
     
-    LOGIN_URL:'http://apolis-grocery.herokuapp.com/api/auth/login',
-    REGISTER_URL:'https://apolis-grocery.herokuapp.com/api/auth/register'
-   
+
 }
+
 export default Endpoints;
