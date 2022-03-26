@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import axios from "axios";
 import Endpoints from "../../../api/Endpoints.js";
 import images from "../../../images/default-profile-pic.jpg";
@@ -9,7 +9,13 @@ import { postList } from "../../../Test/postList";
 
 const PostListsPage = () => {
      const [users, setUsers] = useState([]);
+
     let navigate = useNavigate();
+
+    useEffect(() => {
+      getPost();
+    }, []);
+
     const getPost = () => {
       axios
         .get(Endpoints.GET_POSTS_URL)
@@ -24,8 +30,7 @@ const PostListsPage = () => {
       <div className="post-list">
         <h3 className="text-center"></h3>
   
-         {/* {users.map((customer) => (  */}
-        {postList.map((customer) => (
+         {users.map((customer) => ( 
           <div key={customer.id} className="container">
             <div class="list-group">
               <a
@@ -58,7 +63,10 @@ const PostListsPage = () => {
               <br />
             </div>
           </div>
-        ))}
+        )
+        )
+        
+        }
       </div>
     );
   };
