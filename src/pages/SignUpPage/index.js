@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./style.css";
-import Endpoints from "../../api/Endpoints";
 import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
-  const [responseMessage, setResponseMessaage] = useState({
+  const [errorMessage, setErrorMessage] = useState({
+    usernameError: "",
+    emailError: "",
+    passwordError: "",
+    confirmPasswordError: "",
+  });
+
+  const [responseMessage, setResponseMessage] = useState({
+    message: "",
+    cssClass: "",
+  });
+  const [error, setError] = useState({
     message: "",
     cssClass: "",
   });
@@ -17,32 +27,68 @@ const SignUpPage = () => {
     confirmPassword: "",
   });
 
-  function onSubmitHandler(event) {
-    event.preventDefault();
-    axios
-      .post(Endpoints.REGISTER_URL, user)
-      .then(
-        (response) => {
-          console.log(response.data);
-          setResponseMessaage({
-            message: response.data.message,
-            cssClass: 'alert-success'
-          });
-        },
-        (error) => {
-          setResponseMessaage({
-            message: error.response.data.message,
-            cssClass: 'alert-danger'
-          });
-        }
-      )
-      .catch((error) => console.log(error));
+  function validate() {
+    if (user.userName == "") {
+      setErrorMessage({
+        userNameError: "UserName is Empty",
+      });
+      return true;
+    }
+    if (user.email == "") {
+      setErrorMessage({
+        emailError: "Email is Empty",
+      });
+      return true;
+    }
+    if (user.password == "") {
+      setErrorMessage({
+        passwordError: "Password is Empty",
+      });
+      return true;
+    }
+    if (user.confirmPassword == "") {
+      setErrorMessage({
+        passwordError: "Password is Empty",
+      });
+      return true;
+    } else {
+      setErrorMessage({});
+      return false;
+    }
   }
 
-  function onChangeHandler(event) {
+  function onSubmitHandler(e) {
+    e.preventDefault();
+    if (!validate()) {
+      axios
+        .post("http://localhost:8000/auth/signup", user)
+        .then(
+          (response) => {
+            console.log(response.data);
+            setError({});
+            setResponseMessage({
+              message: response.data.message,
+              cssClass: "alert-success",
+            });
+          },
+          (error) => {
+            setResponseMessage({});
+            setError({
+              message: error.response.data.message,
+              cssClass: "alert-danger",
+            });
+          }
+        )
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
+
+  function onChangeHandler(e) {
     setUser({
       ...user,
-      [event.target.name]: event.target.value,
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -50,69 +96,92 @@ const SignUpPage = () => {
     <div className="row">
       <div className="col-lg-4"></div>
       <div className="col-lg-4">
-        <div className="wrapper">
-          
-         
-
-         {responseMessage.message && (
-              <div class="alert alert-success" role="alert">
-              { responseMessage.message }
+        <div className="wrapper text-center">
+          <br />
+          {responseMessage.message && (
+            <div className="alert alert-success" role="alert">
+              {responseMessage.message}
             </div>
-         )}
+          )}
+          {error.message && (
+            <div className="alert alert-danger" role="alert">
+              {error.message}
+            </div>
+          )}
+          {errorMessage.usernameError && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage.usernameError}
+            </div>
+          )}
 
+          {errorMessage.emailError && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage.emailError}
+            </div>
+          )}
+
+          {errorMessage.mobileError && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage.passwordError}
+            </div>
+          )}
+
+          {errorMessage.passwordError && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage.confirmPasswordError}
+            </div>
+          )}
           <form onSubmit={onSubmitHandler}>
             <div className="form-group">
-             
               <input
+                placeholder="Username"
                 type="text"
-                name="userName"
-                value={user.userName}
+                name="username"
                 onChange={onChangeHandler}
                 className="form-control"
-                placeholder="Username"
+                value={user.userName}
               />
             </div>
+
             <div className="form-group">
-             
               <input
+                placeholder="Email"
                 type="text"
                 name="email"
+                onChange={onChangeHandler}
+                className="form-control"
                 value={user.email}
-                onChange={onChangeHandler}
-                className="form-control"
-                placeholder="Email"
               />
             </div>
+
             <div className="form-group">
-              
               <input
-                type="password"
-                name="password"
-                value={user.password}
-                onChange={onChangeHandler}
-                className="form-control"
                 placeholder="Password"
-              />
-            </div>
-            <div className="form-group">
-              
-              <input
-                type="password"
+                type="text"
                 name="password"
-                value={user.confirmPassword}
                 onChange={onChangeHandler}
                 className="form-control"
-                placeholder="Confirm Password"
+                value={user.password}
               />
             </div>
-            <input
-              type="submit"
-              value="signup"
-              className="btn btn-primary btn-block"
-            />
-            <br />
+
+            <div className="form-group">
+              <input
+                placeholder="Confirm Password"
+                type="text"
+                name="confirmPassword"
+                onChange={onChangeHandler}
+                className="form-control"
+                value={user.confirmPassword}
+              />
+            </div>
+
+            <button type="submit" value="signup" className="btn btn-primary btn-block">
+        
+        <Link  to="/home/postlistpage" className="App-link">Signup</Link>
+      </button>
+<br />
             <p>
-            
               <Link to="/login">Already Registered ? Login</Link>
             </p>
           </form>

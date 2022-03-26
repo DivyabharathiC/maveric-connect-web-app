@@ -1,25 +1,17 @@
 import React from "react";
+import "./style.css";
 import images from "../../images/maveric-logo-white.png";
+
 const Footer = () => {
   return (
-    // <div className='App-footer'>
-    //     <tr>
-    //     <td align='left'>
-    //      <img src={images} alt="Maveric" />
-    //      </td>
-    //     <td align='center'>
-    //    <p>@Copyright, Maveric Systems Ltd 2022</p>
-    //    </td>
-    //    </tr>
-    //    </div>
-
+    <footer className="footer">
     <div  className="App-FooterImage">
       <img src={images} alt="Maveric" />
-
-      <div className="App-footer">
+      <div className="App-footer" >
         <p>@Copyright, Maveric Systems Ltd 2022</p>
       </div>
     </div>
+    </footer>
   );
 };
 
