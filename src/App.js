@@ -7,7 +7,6 @@ import SignUpPage from "./pages/SignUpPage";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-import PostListsPage from "./pages/HomePage/PostListsPage";
 import PostList from "./components/PostList";
 import PostDetail from "./components/PostDetail";
 

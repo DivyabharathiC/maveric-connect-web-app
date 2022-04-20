@@ -2,9 +2,11 @@ import React, { useState , useEffect } from "react";
 import axios from "axios";
 import Endpoints from "../../../api/Endpoints.js";
 import images from "../../../images/default-profile-pic.jpg";
+import commentimg from "../../../images/comment-img.png";
+import likeimg from "../../../images/like-img.png";
+
 import "./style.css";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postList } from "../../../Test/postList";
 
 const PostListsPage = () => {
@@ -27,47 +29,63 @@ const PostListsPage = () => {
         });
     };
     return (
-      <div className="post-list">
-        <h3 className="text-center"></h3>
-  
-         {users.map((customer) => ( 
-          <div key={customer.id} className="container">
-            <div class="list-group">
-              <a
-                href="#"
-                onClick={() => {
-                  navigate(`/postdetailpage/${customer.id}`);
-                }}
-                class="list-group-item list-group-item-action"
-              >
-                <div class="d-flex w-150">
-                  <small>
-                    <img src={images} className="img-thumbnail" width={80} />
-                    <br />
-                    {customer.postedBy.email}
-                  </small>
-                  &nbsp; &nbsp; &nbsp;
-                  <span>{customer.post}</span>
-                </div>
-  
-                <div class="d-flex w-100 justify-content-between">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <small>{customer.likeCounts} Likes</small>
-                  <small>{customer.commentCounts} Comments</small>
-                  <div></div>
-                </div>
-              </a>
-              <br />
-            </div>
+ <div className="post-list">
+      <h3 className="text-center"></h3>
+      {users.map((customer) => (
+        <div key={customer.id} className="container">
+          <div class="list-group">
+            <a
+              href="#"
+              onClick={() => {
+                navigate(`/postdetailpage/${customer.id}`);
+              }}
+              class="list-group-item list-group-item-action"
+              style={{ marginTop: "7px", width: "90%", marginLeft: "5%" }}
+            >
+              <div class="d-flex w-150">
+                <p style={{ fontSize: "15px", color: "#224f8f" }}>
+                  <img
+                    src={images}
+                    className="img-thumbnail"
+                    style={{ width: "70%" }}
+                  />
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      color: "#224f8f",
+                      marginLeft: "15%"
+                    }}
+                  >
+                    {customer.postedBy.firstName}
+                  </p>
+                </p>
+                &nbsp; &nbsp; &nbsp;
+                <span style={{ width: "130%"}}>{customer.post}</span>
+              </div>
+
+              <div class="d-flex w-100 justify-content-between">
+                <small style={{ width: "13%", marginLeft: "60%" }}>
+                  <img
+                    src={likeimg}
+                    className="img-thumbnail"
+                    style={{ width: "25%" }}
+                  />
+                  &emsp;{customer.likeCounts} Likes
+                </small>
+                <small style={{ width: "13%", marginLeft: "10%" }}>
+                  <img
+                    src={commentimg}
+                    className="img-thumbnail"
+                    style={{ width: "25%" }}
+                  />
+                  &emsp;{customer.commentCounts} Comments
+                </small>
+              </div>
+            </a>
           </div>
-        )
-        )
-        
-        }
-      </div>
+        </div>
+      ))}
+    </div>
     );
   };
 export default PostListsPage;

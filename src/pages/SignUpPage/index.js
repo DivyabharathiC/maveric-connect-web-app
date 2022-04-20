@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+import Endpoints from "../../api/Endpoints";
 
 const SignUpPage = () => {
+  let navigate = useNavigate();
+
   const [errorMessage, setErrorMessage] = useState({
     usernameError: "",
     emailError: "",
@@ -61,7 +64,7 @@ const SignUpPage = () => {
     e.preventDefault();
     if (!validate()) {
       axios
-        .post("http://localhost:8000/auth/signup", user)
+        .post(Endpoints.SIGNUP_URL, user)
         .then(
           (response) => {
             console.log(response.data);
@@ -92,7 +95,13 @@ const SignUpPage = () => {
     });
   }
 
+  function onClickHandler(e) {
+    e.preventDefault();
+    navigate("/home/postlistpage");
+  }
+
   return (
+    <div className="wrapper">
     <div className="row">
       <div className="col-lg-4"></div>
       <div className="col-lg-4">
@@ -131,7 +140,7 @@ const SignUpPage = () => {
               {errorMessage.confirmPasswordError}
             </div>
           )}
-          <form onSubmit={onSubmitHandler}>
+          <form onSubmit={onClickHandler}>
             <div className="form-group">
               <input
                 placeholder="Username"
@@ -176,18 +185,20 @@ const SignUpPage = () => {
               />
             </div>
 
-            <button type="submit" value="signup" className="btn btn-primary btn-block">
-        
-        <Link  to="/home/postlistpage" className="App-link">Signup</Link>
-      </button>
-<br />
+             <input
+              type="submit"
+              value="signup"
+              className="btn btn-primary btn-block"
+            />
+
             <p>
-              <Link to="/login">Already Registered ? Login</Link>
+              <a href="/login"><br/>Already a member? Login</a>
             </p>
           </form>
         </div>
       </div>
       <div className="col-lg-4"></div>
+    </div>
     </div>
   );
 };

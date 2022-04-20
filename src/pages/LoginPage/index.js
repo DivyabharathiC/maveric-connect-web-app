@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./style.css";
 import Endpoints from "../../api/Endpoints.js";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import PostListsPage from "../HomePage/PostListsPage";
 
 
 const LoginPage = () => {
+  let navigate = useNavigate();
 
- 
   const [responseMessage, setResponseMessage] = useState({
     message: "",
     cssClass: "",
@@ -55,8 +55,14 @@ const LoginPage = () => {
     });
   }
 
+  function onClickHandler(e) {
+    e.preventDefault();
+    navigate("/home/postlistpage");
+  }
+
 
   return (
+    <div className="wrapper">
     <div className="row">
       <div className="col-lg-4"></div>
       <div className="col-lg-4">
@@ -68,7 +74,7 @@ const LoginPage = () => {
               {responseMessage.message}
             </div>
           )}
-          <form onSubmit={onSubmitHandler}>
+          <form onSubmit={onClickHandler}>
             <div className="form-group">
               <input
                 type="text"
@@ -89,23 +95,26 @@ const LoginPage = () => {
                 placeholder="password"
               />
             </div>
-        
-            <button type="submit" value="login" className="btn btn-primary btn-block">
-        
-              <Link  to="/home/postlistpage" className="App-link">Login</Link>
-            </button>
+            <input
+                type="submit"
+                value="login"
+                className="btn btn-primary btn-block"
+              />
+            
             <br />
-            <p>
-              <Link to="/signup">New to Maveric Book? SignUp</Link>
-            </p>
-          
-            <p>
-              <Link to="">Forgot password?</Link>
-            </p>
-          </form>
+            <a href="/signup">
+                <br />
+                New to Maveric Book? signup
+              </a>
+              <a href="#">
+                <br />
+                Forgot Password?
+              </a>
+            </form>
         </div>
       </div>
       <div className="col-lg-4"></div>
+    </div>
     </div>
   );
 };
